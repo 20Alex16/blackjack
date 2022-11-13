@@ -1,0 +1,146 @@
+:root {
+    --main-color: rgb(13, 37, 73);
+}
+
+body {
+    background-color: var(--main-color);
+}
+
+h2{
+    margin-block: 10px;
+    
+    color: white;
+    text-shadow: 3px 3px 2px black;
+    font-size: 50px;
+    text-align: center;
+    font-weight: lighter;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 200px;
+    width: 80%;
+    /* min-height: 500px; */
+
+    margin: 0 auto;
+    padding: 10px;
+
+    border-radius: 0.5em;
+
+    overflow: hidden;
+
+    /* background-color: rgb(19, 19, 19); */
+    background: url("https://cdnb.artstation.com/p/assets/images/images/010/953/281/large/alicia-anderson-gam332-aanderson-m14-wood-redpaint.jpg?1527102220") repeat;
+    animation: slide 60s linear infinite;
+    /* transition: background-position .3s cubic-bezier(.47, .1, 1, .63);
+    transition-delay: 0.0s, 6s; */
+    /* transition: background-position .3s cubic-bezier(.47, .1, 1, .63); */
+}
+
+@keyframes slide{
+    0%{
+      background-position: 100% 0;
+    }
+    100%{
+        background-position: 300% 100%;
+        /* transform: translate3d(-1692px, 0, 0); */
+    }
+  }
+
+.tray {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:left;
+    align-items: center;
+
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: 0.5em;
+
+    margin: 10px;
+
+    overflow:hidden;
+    background: linear-gradient(rgba(47, 168, 248, 0.342), rgba(0, 0, 0, 0.637)),
+        url("https://media.istockphoto.com/id/104654458/photo/green-retro-pattern-wallpaper-background.jpg?s=612x612&w=0&k=20&c=LG_8aKig4_VlwmUjeLTLUoFPxw38q1-Ectc4bMT25Ig=") repeat;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    aspect-ratio: 1/1.5;
+
+    margin: 10px;
+
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+
+    color: white;
+
+    font-size: 50px;
+
+    /* background-color: rgb(43, 43, 43); */
+
+    background: url("https://1.bp.blogspot.com/-mFD6J3dtuG4/WH-N-siYB3I/AAAAAAAARnA/P7NQdv0ijXkRytl-BEDO4iAJ-FmdiV43QCLcB/s1600/black_wood_parquet_cubes_texture_texturise_DISP.jpg");
+    /* background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-Cmp_eNPxBAa-yjNVALcwkVHXk8oyqs2BrT-y5PSwHVeWfK1sqW2c_SSYbwlMx8IWwNU&usqp=CAU");
+    background-position: center; */
+    background-size:cover;
+}
+
+.card[hidden]{
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-Cmp_eNPxBAa-yjNVALcwkVHXk8oyqs2BrT-y5PSwHVeWfK1sqW2c_SSYbwlMx8IWwNU&usqp=CAU");
+    background-position: center;
+    color:transparent;
+}
+
+.card[hidden]::after{
+    content: "Mistery";
+
+    text-shadow: 3px 3px 2px black;
+    color: white;
+
+    font-size: 40px;
+    transform: rotate(45deg);
+    margin-top: -50px;
+}
+
+.card[revealed]{
+    justify-content: flex-start;
+}
+
+.card[revealed]::after{
+    content: attr(revealed);
+    padding:10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px rgb(4, 0, 44);
+    transform: inherit;
+}
+
+.hit{
+    display: flex;
+    flex-direction: column;
+    margin: 2px;
+    /* background-image: linear-gradient(to right, grey, black); */
+    border-radius: 10px;
+}
+
+.hit::after{
+    justify-content: center;
+    text-align: center;
+    content: "Draw card";
+
+    max-width: 100px;
+    /* aspect-ratio: 1/1.5; */
+
+    text-shadow: 3px 3px 2px black;
+    color: white;
+
+    font-size: 30px;
+
+}
