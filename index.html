@@ -1,35 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=\, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <!-- <script type="module" src="blackjack.js"></script> -->
     <script src="blackjack.js" defer></script>
     <title>Blackjack Demo</title>
 </head>
+
 <body>
     <div class="wrapper">
         <h2>Enemy Deck</h2>
         <div class="tray">
             <div class="hit"></div>
-            <div class="card" hidden>3</div>
-            <div class="card">3</div>
-            <div class="card">11</div>
-            <div class="card">11</div>
-            <div class="card">11</div>
-            <div class="card">3</div>
+            
+            <!-- <div class="card" hidden></div> -->
+            <!-- <div class="card" hidden>3</div>
+                <div class="card">3</div>
+                <div class="card">11</div>
+                <div class="card">11</div>
+                <div class="card">11</div>
+                <div class="card">3</div> -->
         </div>
+        <h3 id="p1sum" class="sum"></h3>
         <br>
-        <h2>Your Deck</h2>
+        <div class="row">
+            <h2>Your Deck</h2>
+            <button id="switch">Switch!</button>
+        </div>
         <div class="tray">
             <div class="hit"></div>
-            <div class="card" hidden revealed="3">3</div>
-            <div class="card">11</div>
-            <div class="card">11</div>
-            <div class="card">11</div>
-            <div class="card">3</div>
+            <!-- <div class="card" hidden revealed="3">3</div>
+                <div class="card">11</div>
+                <div class="card">11</div>
+                <div class="card">11</div>
+                <div class="card">3</div> -->
         </div>
+        <h3 id="p2sum" class="sum"></h3>
+        <br>
+        <button id="reset">Reset</button>
+    </div>
+    
+    <div class="full-screen">
+        <button id="choose">Choose side</Choose></button>
+        <div id="p1"></div>
+        <div id="p2"></div>
     </div>
 </body>
+
 </html>
