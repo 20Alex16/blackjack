@@ -5,9 +5,12 @@
 html, body{
     margin:0;
     overflow-x: hidden;
+    height: 100%;
 }
 
 body {
+    display: flex;
+    align-items: center;
     background-color: var(--main-color);
 }
 
@@ -25,9 +28,12 @@ h2{
     display: flex;
     flex-direction: column;
 
+    flex-wrap: wrap;
+
     min-width: 200px;
     width: 80%;
-    /* min-height: 500px; */
+    height: calc(100% - 50px);
+    /* flex-grow: 1; */
 
     margin: 10px auto;
     padding: 10px;
@@ -38,7 +44,7 @@ h2{
 
     /* background-color: rgb(19, 19, 19); */
     background: url("https://cdnb.artstation.com/p/assets/images/images/010/953/281/large/alicia-anderson-gam332-aanderson-m14-wood-redpaint.jpg?1527102220") repeat;
-    animation: slide 10s linear infinite;
+    animation: slide 20s linear infinite;
     /* transition: background-position .3s cubic-bezier(.47, .1, 1, .63);
     transition-delay: 0.0s, 6s; */
     /* transition: background-position .3s cubic-bezier(.47, .1, 1, .63); */

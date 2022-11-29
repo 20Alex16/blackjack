@@ -4,7 +4,7 @@ var isConnected = false
 
 // make a custom event for incoming messages
 const incomingMessage = new CustomEvent('message');
-const host = '192.168.0.103'
+const host = 'localhost' //'192.168.0.103'
 
 function connect() {
     ws = new WebSocket(`ws://${host}:8080`, clientId);
