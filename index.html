@@ -12,30 +12,41 @@
 </head>
 
 <body>
+    <!-- <button id="switch">Domne fehri</button> -->
     <div class="wrapper">
-        <h2>Enemy Deck</h2>
-        <div class="tray enemy">
-            <div class="hit enemy"></div>
-            <!-- <div class="card">3</div> -->
-            <!-- <div class="card" hidden revealed="3"></div> -->
-            <!-- <div class="card" hidden></div> -->
-        </div>
-        <h3 id="p1sum" class="sum"></h3>
-        <br>
-        <div class="row">
-            <h2>Your Deck</h2>
-        </div>
-        <div class="tray player">
-            <div class="hit player"></div>
-        </div>
-        <h3 id="p2sum" class="sum"></h3>
-    </div>
 
+        <!-- here come the enemies -->
+        
+        <div class="column">
+            <div class="row">
+                <h2 class="player-title">Your Deck</h2>
+                <h2>|</h2>
+            </div>
+            <div class="tray player">
+                <div class="hit inactive"></div>
+                <div class="stand inactive"></div>
+            </div>
+            <h3 id="psum" class="sum"></h3>
+        </div>
+    </div>
+    
     <!-- <div class="full-screen">
         <button id="choose">Choose side</Choose></button>
         <div id="p1"></div>
         <div id="p2"></div>
     </div> -->
 </body>
-
 </html>
+
+<template>
+    <div id="enemy" class="column">
+        <div class="row">
+            <h2>Enemy's Deck</h2>
+            <h2>|</h2>
+        </div>
+        <div class="tray">
+        </div>
+        <h3 class="sum"></h3>
+        <br>
+    </div>
+</template>

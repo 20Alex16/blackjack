@@ -1,38 +1,46 @@
-const clientId = 'client-' + Math.random().toString(10).slice(2, 10);
+const clientId = sessionStorage.getItem('clientId') || 'client-' + Math.random().toString(10).slice(2, 10);
+if(sessionStorage.getItem('clientId') === null) sessionStorage.setItem('clientId', clientId);
+
 var ws;
 var isConnected = false
+var printConsole = true
 
-// make a custom event for incoming messages
-const incomingMessage = new CustomEvent('message');
-const host = 'localhost' //'192.168.0.103'
+const incomingMessage = new EventTarget();
+const connected = new EventTarget();
+
+//'localhost'
+const host = 'alexandrabucidefier.go.ro' //'192.168.0.3'
 
 function connect() {
-    ws = new WebSocket(`ws://${host}:8080`, clientId);
+    ws = new WebSocket(`ws://${host}:81`, clientId);
 
     ws.onopen = () => {
         isConnected = true;
-        console.log('connected!');
+        if (printConsole) console.log('connected!');
         ws.send(clientId);
+        connected.dispatchEvent(new Event('connected'));
     }
 
     ws.onclose = () => {
         isConnected = false;
         ws = null;
-        console.log('disconnected!');
+        connected.dispatchEvent(new Event('disconnected'));
+        if (printConsole) console.log('disconnected!');
     }
 
     ws.onmessage = (message) => {
-        console.log(`Received message => ${message.data}`);
+        if (printConsole) console.log(`Received message => ${message.data}`);
+        incomingMessage.dispatchEvent(new CustomEvent('message', { detail: message.data }));
     }
 }
 
 function send(text) {
     if (!text) return;
     if (!ws) {
-        console.log('not connected!');
+        if (printConsole) console.log('not connected!');
         return;
     }
-    console.log('Sending =>', text);
+    if (printConsole) console.log('Sending =>', text);
     ws.send(text);
 }
 
@@ -41,4 +49,8 @@ function disconnect() {
 }
 
 
-export { connect, send, disconnect, incomingMessage, isConnected };
+export {
+    connect, send, disconnect, incomingMessage,
+    isConnected, printConsole, connected,
+    clientId as id
+};

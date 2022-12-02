@@ -7,15 +7,10 @@ import { EventEmitter } from "events";
 
 var printConsole = false
 
-const server = new WebSocketServer({ port: 8080 });
+const server = new WebSocketServer({ port: 81 });
 var clients = {};
 const clientsChanged = new EventEmitter();
 const incomingMessage = new EventEmitter();
-// var clientsChanged = new CustomEvent('changed', {bubbles: true});
-
-function triggerClientChange() {
-    clientsChanged.emit('changed', { clients: clients });
-}
 
 function getClientId(client) {
     var keys = Object.keys(clients);
@@ -34,6 +29,7 @@ function isClient(clientId) {
 
 server.on('connection', (ws) => {
     ws.on('message', (message) => {
+        message = String(message);
         if (printConsole) console.log(`Received message => ${message}`);
 
         if (isClient(message)) {
@@ -45,11 +41,11 @@ server.on('connection', (ws) => {
             }
             else {
                 clients[message] = { ws: ws };
-                triggerClientChange();
+                clientsChanged.emit('added', message); // send clientId
             }
             if (printConsole) console.log(`Client ${message} connected!`);
         } else {
-            incomingMessage.emit('message', { ws: ws, data: String(message), clientId: getClientId(ws) });
+            incomingMessage.emit('message', { ws: ws, data: message, clientId: getClientId(ws) });
         }
     });
 
@@ -58,9 +54,10 @@ server.on('connection', (ws) => {
         var keys = Object.keys(clients);
         for (var i = 0; i < keys.length; i++) {
             if (clients[keys[i]].ws === ws) {
+                clientsChanged.emit('removed', keys[i]); // send clientId
                 delete clients[keys[i]];
                 // clients[keys[i]] = null;
-                triggerClientChange();
+                // triggerClientChange();
                 break;
             }
         }
@@ -71,4 +68,19 @@ server.on('close', (ws) => {
     if (printConsole) console.log('disconnect');
 });
 
-export { clients, clientsChanged, incomingMessage };
+function broadcastAll(data) {
+    var keys = Object.keys(clients);
+    for (var i = 0; i < keys.length; i++) {
+        clients[keys[i]].ws.send(data);
+    }
+}
+
+function broadcastAllExcept(data, client) { // client is clientId
+    var keys = Object.keys(clients);
+    for (var i = 0; i < keys.length; i++) {
+        if (keys[i] != client)
+            clients[keys[i]].ws.send(data);
+    }
+}
+
+export { clients, clientsChanged, incomingMessage, printConsole };

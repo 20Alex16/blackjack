@@ -4,7 +4,7 @@
 
 html, body{
     margin:0;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     height: 100%;
 }
 
@@ -19,7 +19,8 @@ h2{
     
     color: white;
     text-shadow: 3px 3px 2px black;
-    font-size: 40px;
+    /* font-size: 40px; */
+    font-size: 3vw;
     text-align: center;
     font-weight: lighter;
 }
@@ -32,15 +33,16 @@ h2{
 
     min-width: 200px;
     width: 80%;
+    /* flex-grow: 1;
+    height:auto; */
     height: calc(100% - 50px);
-    /* flex-grow: 1; */
 
     margin: 10px auto;
     padding: 10px;
 
     border-radius: 0.5em;
 
-    overflow: hidden;
+    /* overflow: hidden; */
 
     /* background-color: rgb(19, 19, 19); */
     background: url("https://cdnb.artstation.com/p/assets/images/images/010/953/281/large/alicia-anderson-gam332-aanderson-m14-wood-redpaint.jpg?1527102220") repeat;
@@ -64,18 +66,21 @@ h2{
 .tray {
     display: flex;
     flex-wrap: wrap;
+    flex-shrink: 1;
     flex-direction: row;
     justify-content:left;
+    /* justify-content: space-around; */
     align-items: center;
 
     max-width: 100%;
-    min-height: 150px;
+    /* min-height: 150px; */
     /* max-height: 500px; */
     border-radius: 0.5em;
 
     margin: 10px;
+    padding-inline: 10px;
 
-    overflow:hidden;
+    /* overflow:hidden; */
     background: linear-gradient(rgba(47, 168, 248, 0.342), rgba(0, 0, 0, 0.637)),
         url("https://media.istockphoto.com/id/104654458/photo/green-retro-pattern-wallpaper-background.jpg?s=612x612&w=0&k=20&c=LG_8aKig4_VlwmUjeLTLUoFPxw38q1-Ectc4bMT25Ig=") repeat;
 }
@@ -86,24 +91,35 @@ h2{
     justify-content: center;
     align-items: center;
 
-    width: 80px;
+    /* width: 80px; */
+    width: 10vw;
+    max-width: 80px;
     aspect-ratio: 1/1.5;
 
-    margin: 10px;
+    /* margin: 10px; */
+    margin:5px;
 
     border-radius: 10px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
 
     color: white;
+    text-shadow: 3px 3px 2px black;
 
     font-size: 50px;
 
     /* background-color: rgb(43, 43, 43); */
-
-    background: url("https://1.bp.blogspot.com/-mFD6J3dtuG4/WH-N-siYB3I/AAAAAAAARnA/P7NQdv0ijXkRytl-BEDO4iAJ-FmdiV43QCLcB/s1600/black_wood_parquet_cubes_texture_texturise_DISP.jpg");
+    background: url("https://i.natgeofe.com/k/5e4ea67e-2219-4de4-9240-2992faef0cb6/trump-portrait_2x3.jpg");
+    /* background: url("https://1.bp.blogspot.com/-mFD6J3dtuG4/WH-N-siYB3I/AAAAAAAARnA/P7NQdv0ijXkRytl-BEDO4iAJ-FmdiV43QCLcB/s1600/black_wood_parquet_cubes_texture_texturise_DISP.jpg"); */
     /* background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-Cmp_eNPxBAa-yjNVALcwkVHXk8oyqs2BrT-y5PSwHVeWfK1sqW2c_SSYbwlMx8IWwNU&usqp=CAU");
     background-position: center; */
     background-size:cover;
+}
+
+.card::before{
+    content: "TRUMP CARD";
+    font-size: 12px;
+    /* display: block; */
+    padding-top: 10%;
 }
 
 .card[hidden]{
@@ -125,6 +141,7 @@ h2{
 
 .card[revealed]{
     justify-content: flex-start;
+    text-align: center;
 }
 
 .card[revealed]::after{
@@ -135,7 +152,7 @@ h2{
     transform: inherit;
 }
 
-.hit{
+.hit, .stand{
     display: flex;
     flex-direction: column;
     margin: 2px;
@@ -143,21 +160,40 @@ h2{
     border-radius: 10px;
 }
 
-.hit::after{
+.inactive::after{
+    background-color: rgba(0, 0, 0, 0.591) !important;
+    background-image: none !important;
+    border-bottom: none !important;
+}
+
+.hit::after, .stand::after{
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     content: "Draw card";
     
-    max-width: 100px;
-    min-height: 150px;
-    /* aspect-ratio: 1/1.5; */
+
+    /* min-width: 80px; */
+    width: 90px;
+    /* height: 150px; */
+    aspect-ratio: 1/1.5;
+    margin:2px;
+    /* height: 120px; */
+    /* min-height: 150px; */
 
     text-shadow: 3px 3px 2px black;
     color: white;
+
+    border-radius: 10px;
+    background-image: linear-gradient(to top, rgba(65, 176, 10, 0.475),rgba(0,0,0,0));
+    border-bottom: 2px solid greenyellow;
     
     font-size: 30px;
+}
+
+.stand::after{
+    content: "Stand";
 }
 
 .sum{
@@ -315,4 +351,80 @@ h2{
     background-size: contain;
     background-position: right;
     transform: none;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly;
+    align-items: center; */
+    margin:0;
+    padding:0;
+}
+
+/* if mobile, make h2 smaller */
+@media screen and (orientation: portrait) {
+    h2 {
+        font-size: 5vw;
+    }
+    .card{
+        /* width:8vw; */
+        width: 50px;
+        font-size: 1.5em;
+    }
+    .card[hidden]::after{
+        font-size: 0.8em;
+    }
+    .hit, .stand, .hit::after, .stand::after{
+        width: 50px;
+        font-size: 1em;
+    }
+    .tray{
+        padding:5px;
+    }
+    .card[revealed]::after{
+        width: 30%;
+    }
+    .sum{
+        font-size: 1em;
+    }
+}
+
+@media screen and (orientation: landscape) and (max-width: 1000px) {
+    .wrapper{
+        width:100%;
+        height:100%;
+    }
+    h2 {
+        font-size: 3vw;
+        /* font-size: 1.5em; */
+    }
+    .card{
+        width: 8vw;
+        /* width: 50px; */
+        font-size: 2.5em;
+        margin:3px;
+    }
+    .card[hidden]::after{
+        font-size: 0.7em;
+    }
+    .hit, .stand, .hit::after, .stand::after{
+        width: 50px;
+        font-size: 1.1em;
+    }
+    .tray{
+        padding:10px;
+    }
+    .card[revealed]::after{
+        text-align: start;
+        width: 30%;
+        height: 20%;
+    }
+    .sum{
+        font-size: 1em;
+    }
+    .column{
+        /* max-width: 45%; */
+        flex-grow: 1;
+    }
 }
